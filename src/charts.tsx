@@ -23,10 +23,10 @@ const monthlyProgressData = [
 ];
 
 const ergonomicCategoriesData = [
-  { name: 'Posture', value: 85, color: '#ea580c' },
-  { name: 'Monitor', value: 92, color: '#fb923c' },
-  { name: 'Lighting', value: 78, color: '#fed7aa' },
-  { name: 'Breaks', value: 66, color: '#c2410c' }
+  { name: 'Posture', value: 85, color: 'var(--color-primary)' },
+  { name: 'Monitor', value: 92, color: 'var(--color-secondary)' },
+  { name: 'Lighting', value: 78, color: 'var(--color-accent)' },
+  { name: 'Breaks', value: 66, color: 'var(--color-surface-alt2)' }
 ];
 
 const dailyActivityData = [
@@ -43,14 +43,14 @@ const dailyActivityData = [
 
 export function WeeklyBreaksChart() {
   const { isDark } = useTheme();
-  const textColor = isDark ? '#fbbf24' : '#431407';
-  
+  const textColor = isDark ? 'var(--color-accent)' : 'var(--color-primary)';
+
   return (
     <div style={{ background: 'var(--color-surface)', borderRadius: 16, padding: 20, boxShadow: 'var(--shadow-md)' }}>
       <h3 style={{ color: 'var(--color-primary)', marginBottom: 16, fontSize: 18, fontWeight: 600 }}>Weekly Break Pattern</h3>
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={weeklyBreaksData}>
-          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#44403c' : '#fed7aa'} />
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'var(--color-surface-alt2)' : 'var(--color-accent)'} />
           <XAxis dataKey="day" stroke={textColor} fontSize={12} />
           <YAxis stroke={textColor} fontSize={12} />
           <Tooltip 
@@ -61,24 +61,24 @@ export function WeeklyBreaksChart() {
               color: textColor
             }} 
           />
-          <Bar dataKey="breaks" fill="#ea580c" radius={4} />
-          <Bar dataKey="target" fill="#fed7aa" radius={4} />
+          <Bar dataKey="breaks" fill="var(--color-primary)" radius={4} />
+          <Bar dataKey="target" fill="var(--color-accent)" radius={4} />
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
 }
 
-export function ProgressTrendChart() {
+export function MonthlyProgressChart() {
   const { isDark } = useTheme();
-  const textColor = isDark ? '#fbbf24' : '#431407';
-  
+  const textColor = isDark ? 'var(--color-accent)' : 'var(--color-primary)';
+
   return (
     <div style={{ background: 'var(--color-surface)', borderRadius: 16, padding: 20, boxShadow: 'var(--shadow-md)' }}>
-      <h3 style={{ color: 'var(--color-primary)', marginBottom: 16, fontSize: 18, fontWeight: 600 }}>6-Month Progress Trend</h3>
+      <h3 style={{ color: 'var(--color-primary)', marginBottom: 16, fontSize: 18, fontWeight: 600 }}>Monthly Progress Overview</h3>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart data={monthlyProgressData}>
-          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#44403c' : '#fed7aa'} />
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'var(--color-surface-alt2)' : 'var(--color-accent)'} />
           <XAxis dataKey="month" stroke={textColor} fontSize={12} />
           <YAxis stroke={textColor} fontSize={12} />
           <Tooltip 
@@ -92,14 +92,14 @@ export function ProgressTrendChart() {
           <Area 
             type="monotone" 
             dataKey="score" 
-            stroke="#ea580c" 
-            fill="url(#colorGradient)" 
+            stroke="var(--color-primary)" 
+            fill="url(#blueGradient)" 
             strokeWidth={3}
           />
           <defs>
-            <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#ea580c" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#ea580c" stopOpacity={0.1}/>
+            <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0.1}/>
             </linearGradient>
           </defs>
         </AreaChart>
@@ -153,14 +153,14 @@ export function ErgonomicCategoriesChart() {
 
 export function DailyActivityChart() {
   const { isDark } = useTheme();
-  const textColor = isDark ? '#fbbf24' : '#431407';
+  const textColor = isDark ? 'var(--color-accent)' : 'var(--color-primary)';
   
   return (
     <div style={{ background: 'var(--color-surface)', borderRadius: 16, padding: 20, boxShadow: 'var(--shadow-md)' }}>
       <h3 style={{ color: 'var(--color-primary)', marginBottom: 16, fontSize: 18, fontWeight: 600 }}>Today's Activity Level</h3>
       <ResponsiveContainer width="100%" height={180}>
         <LineChart data={dailyActivityData}>
-          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#44403c' : '#fed7aa'} />
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? 'var(--color-surface-alt2)' : 'var(--color-accent)'} />
           <XAxis dataKey="time" stroke={textColor} fontSize={12} />
           <YAxis stroke={textColor} fontSize={12} />
           <Tooltip 
@@ -174,10 +174,10 @@ export function DailyActivityChart() {
           <Line 
             type="monotone" 
             dataKey="activity" 
-            stroke="#ea580c" 
+            stroke="var(--color-primary)" 
             strokeWidth={3}
-            dot={{ fill: '#ea580c', strokeWidth: 2, r: 4 }}
-            activeDot={{ r: 6, fill: '#fb923c' }}
+            dot={{ fill: 'var(--color-primary)', strokeWidth: 2, r: 4 }}
+            activeDot={{ r: 6, fill: 'var(--color-secondary)' }}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -187,7 +187,7 @@ export function DailyActivityChart() {
 
 export function WellnessScoreRadial({ score = 82 }: { score?: number }) {
   const { isDark } = useTheme();
-  const data = [{ name: 'Wellness Score', value: score, fill: '#ea580c' }];
+  const data = [{ name: 'Wellness Score', value: score, fill: 'var(--color-primary)' }];
   
   return (
     <div style={{ background: 'var(--color-surface)', borderRadius: 16, padding: 20, boxShadow: 'var(--shadow-md)', textAlign: 'center' }}>
@@ -195,7 +195,7 @@ export function WellnessScoreRadial({ score = 82 }: { score?: number }) {
       <div style={{ position: 'relative', height: 200 }}>
         <ResponsiveContainer width="100%" height={200}>
           <RadialBarChart cx="50%" cy="50%" innerRadius="60%" outerRadius="90%" data={data}>
-            <RadialBar dataKey="value" cornerRadius={10} fill="#ea580c" />
+            <RadialBar dataKey="value" cornerRadius={10} fill="var(--color-primary)" />
           </RadialBarChart>
         </ResponsiveContainer>
         <div style={{ 
@@ -212,6 +212,37 @@ export function WellnessScoreRadial({ score = 82 }: { score?: number }) {
           <div style={{ fontSize: 14, color: 'var(--color-text-soft)', marginTop: 4, lineHeight: 1 }}>Excellent</div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function ProgressTrendChart() {
+  const data = [
+    { name: 'Week 1', progress: 20 },
+    { name: 'Week 2', progress: 40 },
+    { name: 'Week 3', progress: 60 },
+    { name: 'Week 4', progress: 80 },
+  ];
+
+  return (
+    <div style={{ background: 'var(--color-surface)', borderRadius: 16, padding: 20, boxShadow: 'var(--shadow-md)' }}>
+      <h3 style={{ color: 'var(--color-primary)', marginBottom: 16, fontSize: 18, fontWeight: 600 }}>Progress Trend</h3>
+      <ResponsiveContainer width="100%" height={200}>
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-accent)" />
+          <XAxis dataKey="name" stroke="var(--color-primary)" fontSize={12} />
+          <YAxis stroke="var(--color-primary)" fontSize={12} />
+          <Tooltip 
+            contentStyle={{ 
+              background: 'var(--color-surface-alt)', 
+              border: '1px solid var(--color-primary)', 
+              borderRadius: 8,
+              color: 'var(--color-primary)'
+            }} 
+          />
+          <Line type="monotone" dataKey="progress" stroke="var(--color-primary)" strokeWidth={3} />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }

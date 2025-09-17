@@ -1,38 +1,51 @@
 /* Orange brand theme - Light Mode (lighter, friendlier orange) */
 :root {
-  /* Lighter primary for a friendlier look */
-  --color-primary: #fb923c; /* lighter orange */
-  --color-secondary: #ea580c; /* slightly deeper accent */
-  --color-accent: #fed7aa; /* soft accent */
-  --color-background: #fff7ed;
+  /* Professional blue theme */
+  --color-primary: #0a2540; /* deep blue */
+  --color-secondary: #1976d2; /* accent blue */
+  --color-accent: #90caf9; /* soft blue accent */
+  --color-background: #f4f8fb; /* very light blue */
   --color-surface: #ffffff;
-  --color-surface-alt: #ffedd5;
-  --color-surface-alt2: #fed7aa;
-  --color-text: #431407;
-  --color-text-soft: #7c2d12;
-  /* use lighter orange tints for shadows */
-  --shadow-sm: 0 2px 4px rgba(251,146,60,0.08);
-  --shadow-md: 0 4px 12px rgba(251,146,60,0.12);
-  --shadow-lg: 0 8px 28px rgba(251,146,60,0.16);
-  --gradient-bg: radial-gradient(circle at 30% 20%, #fff1e6 0%, #fff7ed 60%, #fffbeb 100%);
+  --color-surface-alt: #e3eaf3; /* pale blue */
+  --color-surface-alt2: #bbdefb; /* lighter blue accent */
+  --color-text: #1a237e; /* dark blue for text */
+  --color-text-soft: #5c6bc0; /* muted blue for soft text */
+  --color-text-muted: #757575; /* For less important text */
+  --color-success: #2e7d32; /* Green for success states */
+  --color-success-bg: #e8f5e8; /* Light green bg for success messages */
+  --color-info: #1976d2; /* Blue for info messages */
+  --color-info-bg: #e3f2fd; /* Light blue bg for info */
+  --color-warning: #f57c00; /* Orange for warnings */
+  --color-error: #d32f2f; /* Red for errors */
+  --shadow-sm: 0 2px 4px rgba(10,37,64,0.08);
+  --shadow-md: 0 4px 12px rgba(10,37,64,0.12);
+  --shadow-lg: 0 8px 28px rgba(10,37,64,0.16);
+  --gradient-bg: radial-gradient(circle at 30% 20%, #e3eaf3 0%, #f4f8fb 60%, #bbdefb 100%);
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
-  /* Dark theme uses the lighter orange as primary for consistency */
-  --color-primary: #fb923c;
-  --color-secondary: #ea580c;
-  --color-accent: #fed7aa;
-  --color-background: #0c0a09;
-  --color-surface: #1c1917;
-  --color-surface-alt: #292524;
-  --color-surface-alt2: #44403c;
-  --color-text: #fbbf24;
-  --color-text-soft: #d97706;
+  /* Professional blue theme - dark mode - Enhanced readability */
+  --color-primary: #90caf9; /* Brighter blue for primary */
+  --color-secondary: #1976d2; /* Accent blue remains */
+  --color-accent: #e3eaf3; /* Very light blue accent for contrast */
+  --color-background: #0d1117; /* Darker background for better contrast */
+  --color-surface: #161b22; /* Darker surface for better text contrast */
+  --color-surface-alt: #21262d; /* Slightly lighter surface */
+  --color-surface-alt2: #30363d; /* Even lighter for variety */
+  --color-text: #f0f6fc; /* Very bright white-blue for primary text */
+  --color-text-soft: #c9d1d9; /* Softer but still very readable */
+  --color-text-muted: #8b949e; /* For less important text */
+  --color-success: #3fb950; /* Green for success states */
+  --color-success-bg: #0d1117; /* Dark bg for success messages */
+  --color-info: #58a6ff; /* Blue for info messages */
+  --color-info-bg: #0c2d6b; /* Dark blue bg for info */
+  --color-warning: #d29922; /* Orange for warnings */
+  --color-error: #f85149; /* Red for errors */
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 28px rgba(0,0,0,0.5);
-  --gradient-bg: radial-gradient(circle at 30% 20%, #1c1917 0%, #0c0a09 60%, #000 100%);
+  --gradient-bg: radial-gradient(circle at 30% 20%, #161b22 0%, #0d1117 60%, #21262d 100%);
 }
 
 /* Toast animations */
@@ -71,6 +84,34 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Ensure all text elements use theme colors */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+}
+
+p, span, div {
+  color: var(--color-text);
+}
+
+/* Muted text class for less important content */
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+/* Soft text class for secondary content */
+.text-soft {
+  color: var(--color-text-soft) !important;
+}
+
+/* High contrast text for important content */
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  padding: 2px 4px;
+  border-radius: 4px;
 }

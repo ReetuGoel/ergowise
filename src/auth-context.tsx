@@ -1,5 +1,18 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
+// UUID generator fallback for browsers that don't support crypto.randomUUID
+function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback implementation
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 export interface User {
   id: string;
   name: string;
@@ -62,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signup = async (name: string, email: string, password: string) => {
     const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
     if (exists) return false;
-    const newUser: User = { id: crypto.randomUUID(), name, email, avatar: undefined };
+    const newUser: User = { id: generateUUID(), name, email, avatar: undefined };
     const updated = [...users, newUser];
     persistUsers(updated);
     setUser(newUser);

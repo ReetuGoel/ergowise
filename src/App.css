@@ -1,4 +1,3 @@
-
 /* Place your CSS styles here. Example: */
 .App {
   text-align: center;
@@ -15,19 +14,22 @@
   }
 }
 
+
 .App-header {
-  background-color: #282c34;
+  background-color: #0a2540; /* Professional deep blue */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #f4f8fb; /* Soft off-white for contrast */
 }
 
+
 .App-link {
-  color: #61dafb;
+  color: #1976d2; /* Accent blue for links */
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
@@ -38,6 +40,7 @@
     transform: rotate(360deg);
   }
 }
+
 
 
 

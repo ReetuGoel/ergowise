@@ -7,9 +7,10 @@ interface SidebarProps {
   onQuickAction: (action: string) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  tabs?: string[];
 }
 
-export function Sidebar({ onQuickAction, activeTab, setActiveTab }: SidebarProps) {
+export function Sidebar({ onQuickAction, activeTab, setActiveTab, tabs }: SidebarProps) {
   let user: any = undefined;
   let hasAuth = false;
   try {
@@ -41,12 +42,20 @@ export function Sidebar({ onQuickAction, activeTab, setActiveTab }: SidebarProps
     }
   ];
 
-  const navigationItems = [
-    { id: 'Dashboard', icon: <BarChart3 size={18} />, label: 'Dashboard' },
-    { id: 'Assessment', icon: <CheckCircle size={18} />, label: 'Assessment' },
-    { id: 'Analytics', icon: <Target size={18} />, label: 'Analytics' },
-    { id: 'Break Timer', icon: <Clock size={18} />, label: 'Break Timer' }
-  ];
+  const navigationIcons: Record<string, React.ReactNode> = {
+    'Dashboard': <BarChart3 size={18} />,
+    'Assessment': <CheckCircle size={18} />,
+    'Analytics': <Target size={18} />,
+    'Break Timer': <Clock size={18} />,
+    'Recommendations': <Settings size={18} />,
+    'Posture Capture': <User size={18} />
+  };
+  const navigationItems = (tabs ?? [
+    'Dashboard',
+    'Assessment',
+    'Analytics',
+    'Break Timer'
+  ]).map(tab => ({ id: tab, icon: navigationIcons[tab] ?? <Settings size={18} />, label: tab }));
 
   return (
     <div style={{
@@ -83,8 +92,8 @@ export function Sidebar({ onQuickAction, activeTab, setActiveTab }: SidebarProps
                 display: 'flex',
                 alignItems: 'center',
                 gap: 12,
-                background: 'linear-gradient(135deg, var(--color-surface-alt), var(--color-surface-alt2))',
-                border: '1px solid var(--color-primary)',
+                background: 'var(--color-surface-alt)',
+                border: '1px solid var(--color-surface-alt2)',
                 borderRadius: 12,
                 padding: '16px 20px',
                 cursor: 'pointer',
@@ -94,7 +103,7 @@ export function Sidebar({ onQuickAction, activeTab, setActiveTab }: SidebarProps
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(234,88,12,0.2)';
+                e.currentTarget.style.boxShadow = '0 4px 16px var(--shadow-md)';
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -191,36 +200,49 @@ export function Sidebar({ onQuickAction, activeTab, setActiveTab }: SidebarProps
         border: '1px solid var(--color-surface-alt2)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ 
-            width: 48, 
-            height: 48, 
-            borderRadius: '50%', 
+          <div style={{
+            width: 64,
+            height: 64,
+            borderRadius: '50%',
             overflow: 'hidden',
-            display: 'flex', 
-            alignItems: 'center', 
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
-            background: 'var(--color-surface)'
+            background: 'var(--color-surface)',
+            boxShadow: '0 2px 8px rgba(234,88,12,0.10)',
+            border: '2px solid var(--color-primary)'
           }}>
             {user?.avatar ? (
-              <img src={user.avatar} alt="avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={user.avatar} alt="avatar" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
             ) : (
-              <User size={20} color="var(--color-primary)" />
+              <User size={32} color="var(--color-primary)" />
             )}
           </div>
-          <div>
-            <div style={{ 
-              fontSize: 14, 
-              fontWeight: 600, 
-              color: 'var(--color-text)',
-              marginBottom: 2
+          <div style={{ marginLeft: 12 }}>
+            <div style={{
+              fontSize: 16,
+              fontWeight: 700,
+              color: 'var(--color-accent)',
+              marginBottom: 4,
+              letterSpacing: 0.5
             }}>
               Quick Stats
             </div>
-            <div style={{ 
-              fontSize: 12, 
-              color: 'var(--color-text-soft)' 
+            <div style={{
+              fontSize: 15,
+              color: '#fff',
+              background: 'linear-gradient(90deg, #fb923c 0%, #ea580c 100%)',
+              borderRadius: 10,
+              padding: '6px 16px',
+              fontWeight: 600,
+              display: 'inline-block',
+              boxShadow: '0 2px 8px rgba(234,88,12,0.10)',
+              marginTop: 2
             }}>
-              7-day streak • 82% wellness
+              <span role="img" aria-label="fire" style={{ marginRight: 6, fontSize: 18 }}>🔥</span>
+              <span style={{ color: '#fff', fontWeight: 700 }}>7-day streak</span>
+              &nbsp;•&nbsp;
+              <span style={{ color: '#ffe5b4', fontWeight: 700 }}>82% wellness</span>
             </div>
           </div>
         </div>
